@@ -7,4 +7,4 @@ En ligne : https://drloser123.github.io/verif-materiel/
 - `index.html` : page d'accueil avec la liste des fiches
 - `magenta-materiel/` : VPS Magenta, vérification du matériel (version août 2021)
 
-Fiches à venir : Magenta véhicule, Valmy matériel, Valmy véhicule, Lot A.
+- `magenta-vehicule/`, `valmy-materiel/`, `valmy-vehicule/`, `lot-a/` : les autres fiches

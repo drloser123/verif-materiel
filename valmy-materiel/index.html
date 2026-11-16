@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VL Valmy – matériel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* VOICE: clinique, rapide, lisible d'une main dans un véhicule mal éclairé
+   IDEA: la feuille de vérif papier, devenue une liste qu'on coche au pouce
+   PICTURE: la liste elle-même, avec sa barre de recherche collée en haut
+   COLOUR and TYPE: bleu marine et orange Protection Civile, surlignage jaune ; Inter Tight + Inter
+   LAYOUT: une colonne, sections repliables, en-tête collant, cibles de 44px */
+:root{color-scheme:light dark;
+--bg:light-dark(#f1f3f8,#0c1a45);--panel:light-dark(#fff,#12235a);--ink:light-dark(#12235a,#f4f6fc);
+--mute:light-dark(#5a6587,#b3bddc);--line:light-dark(#dde2ee,#26397a);--mag:light-dark(#12235a,#f39200);
+--magbg:light-dark(#e8ecf6,#1c3170);--or:light-dark(#d97a00,#f39200);--on:light-dark(#fff,#12235a);--hl:light-dark(#ffe14d,#ffd60a);--hlink:#12235a;--ok:light-dark(#1d7a46,#4cd38a)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 Inter,system-ui,sans-serif;overflow-x:clip}
+header{position:sticky;top:0;z-index:5;background:var(--panel);border-bottom:3px solid #f39200;padding:10px max(4vw,12px) 10px}
+.top{display:flex;align-items:baseline;justify-content:space-between;gap:8px;max-width:760px;margin:0 auto}
+h1{font:700 19px/1.1 "Inter Tight",sans-serif;margin:0}
+h1 b{color:var(--or)}
+.prog{font-size:13px;color:var(--mute);white-space:nowrap}
+.sbox{position:relative;max-width:760px;margin:8px auto 0}
+#q{width:100%;font:16px Inter,sans-serif;padding:11px 44px 11px 14px;border:2px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);outline:none}
+#q:focus{border-color:#f39200}
+#clr{position:absolute;right:4px;top:50%;transform:translateY(-50%);width:40px;height:40px;border:0;background:none;color:var(--mute);font-size:22px;cursor:pointer;display:none;border-radius:10px}
+#clr.on{display:block}
+.tabs{display:flex;gap:6px;max-width:760px;margin:8px auto 0;overflow-x:auto}
+.tabs button{flex:none;font:600 14px Inter,sans-serif;padding:8px 14px;min-height:38px;border-radius:99px;border:1px solid var(--line);background:none;color:var(--ink);cursor:pointer}
+.tabs button[aria-pressed=true]{background:var(--mag);border-color:var(--mag);color:var(--on)}
+main{max-width:760px;margin:0 auto;padding:12px max(4vw,12px) 80px}
+.info{font-size:14px;color:var(--mute);margin:4px 2px 14px}
+.info strong{color:var(--ink)}
+.sheet{font:700 13px "Inter Tight",sans-serif;color:var(--or);margin:22px 4px 8px}
+details{background:var(--panel);border:1px solid var(--line);border-radius:14px;margin:0 0 10px;overflow:hidden}
+summary{list-style:none;display:flex;align-items:center;gap:10px;padding:12px 14px;min-height:52px;cursor:pointer;font:700 17px/1.2 "Inter Tight",sans-serif}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"";width:9px;height:9px;border-right:2px solid var(--mute);border-bottom:2px solid var(--mute);transform:rotate(45deg);margin-left:auto;flex:none;transition:transform .15s}
+details[open]>summary::after{transform:rotate(-135deg)}
+.cnt{font:500 13px Inter,sans-serif;color:var(--mute);white-space:nowrap}
+.cnt.done{color:var(--ok)}
+.where{font:500 12px Inter,sans-serif;color:var(--mute);display:block;margin-top:2px}
+.g{font:600 13px Inter,sans-serif;color:var(--mag);background:var(--magbg);padding:7px 14px;margin:0}
+ul{list-style:none;margin:0;padding:0}
+li label{display:flex;align-items:flex-start;gap:12px;padding:11px 14px;min-height:46px;border-top:1px solid var(--line);cursor:pointer}
+li input{appearance:none;flex:none;width:22px;height:22px;margin:0;border:2px solid var(--mute);border-radius:6px;display:grid;place-content:center;cursor:pointer}
+li input:checked{background:var(--ok);border-color:var(--ok)}
+li input:checked::after{content:"";width:6px;height:11px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg) translate(-1px,-1px)}
+li input:focus-visible{outline:2px solid var(--mag);outline-offset:2px}
+li input:checked+span{color:var(--mute);text-decoration:line-through}
+.q{font-weight:700;color:var(--mag);margin-right:2px}
+.n{display:block;font-size:13px;color:var(--mute);margin-top:2px}
+mark{background:var(--hl);color:var(--hlink);border-radius:3px;padding:0 1px;box-shadow:0 0 0 2px var(--hl)}
+.empty{text-align:center;color:var(--mute);padding:40px 10px}
+.foot{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:20px;font-size:13px;color:var(--mute)}
+.foot button{font:600 14px Inter,sans-serif;padding:10px 16px;min-height:44px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer}
+
+.back{display:block;max-width:760px;margin:0 auto 4px;font:600 13px Inter,sans-serif;color:var(--mute);text-decoration:none;padding:2px 0}
+.back:focus-visible{outline:2px solid #f39200}
+.tr{display:flex;align-items:center;gap:8px;flex:none}
+.top{align-items:center}
+.top .rz{font:600 13px Inter,sans-serif;padding:6px 10px;min-height:36px;border-radius:9px;border:1px solid var(--line);background:none;color:var(--ink);cursor:pointer;white-space:nowrap}
+.rz.warn{border-color:#d7261e!important;color:#fff!important;background:#d7261e!important}
+@media(max-width:380px){.prog{display:none}}
+@media (prefers-reduced-motion:reduce){summary::after{transition:none}}
+</style>
+</head>
+<body>
+<header>
+  <a class="back" href="../" aria-label="Toutes les fiches">‹ Fiches</a>
+  <div class="top"><h1>VL <b>Valmy</b> · matériel</h1><span class="tr"><span class="prog" id="prog"></span><button class="rz" type="button">Tout décocher</button></span></div>
+  <div class="sbox"><input id="q" type="search" placeholder="Rechercher : garrot, CH18, Lot C…" autocomplete="off" aria-label="Rechercher"><button id="clr" aria-label="Effacer">×</button></div>
+  <div class="tabs" id="tabs"><button data-f="0" aria-pressed="true">Tout</button><button data-f="1" aria-pressed="false">Remisé au local</button><button data-f="2" aria-pressed="false">Véhicule</button></div>
+</header>
+<main>
+  <p class="info" id="info">Vérifier présence, quantité et péremption. Compléter ce qui manque à partir des réserves du local avant de partir en poste. <strong>Version mai 2022 (feuille 2 : février 2022).</strong></p>
+  <div id="list"></div>
+  <div class="foot"><button class="rz" type="button">Tout décocher</button><span id="msg">Les cases cochées restent sur ce téléphone.</span></div>
+</main>
+<script>
+{
+// Données : [feuille, titre, emplacement, [ items | {g:titre, i:[items]} ]] ; item = "texte" ou "texte|note"
+const D=[[1,"Sac d'assistance ventilatoire","",[{"g": "Pochette supérieure · BAVU adulte","i": ["1 ballon auto-remplisseur","1 valve","1 ballon réserve","1 tubulure"]},{"g": "Espace central","i": ["1 bouteille O2 5 L|Noter la pression (bars)","1 CardioPompe","1 TwinPump","1 tuyau (TwinPump)","1 embout (TwinPump)"]},{"g": "Pochette adulte noire","i": ["1 jeu de canules en 8 tailles","1 tubulure de réserve","2 filtres à usage unique","Masque d'insufflation T2","Masque d'insufflation T3/4","Masque d'insufflation T5","2 MHC adulte","2 MMC adulte","2 lunettes O2","2 sondes CH26","2 sondes CH18","2 sondes CH12","2 sondes CH8","2 sondes CH6","1 poire de gonflage","1 Peakflow"]},{"g": "Pochette pédiatrique orange","i": ["1 ballon auto-remplisseur pédia","1 valve","1 ballon réserve","1 tubulure","1 filtre","Masque d'insufflation T0","Masque d'insufflation T0A","2 MHC pédia","2 MMC pédia","1 lunettes O2"]},{"g": "Rabat · colliers cervicaux UU","i": ["1 collier adulte","1 collier pédiatrique","1 collier no neck"]},{"g": "Pochette extérieure","i": ["3 draps à usage unique","1 réserve de documents administratifs"]}]],[1,"Sac de soins","",[{"g": "Pochette bleue","i": ["12 dosettes 5 ml sérum physio","12 dosettes 5 ml chlorhexidine 0,5 %","1 GHA (gel hydro-alcoolique)","2 poches de froid","1 thermomètre axillaire souple","1 pince à écharde"]},{"g": "Pochette rouge","i": ["2 bandes petites","2 bandes grandes","1 Elastoplaste petit","1 Elastoplaste grand","2 rouleaux de sparadrap","1 boîte de pansements individuels","Filets tubulaires (3 tailles)"]},{"g": "Pochette verte · kit pharmacie","i": ["FR aide à la prise de médicaments","1 Ventoline 100 µg/dose","Nalscue 0,9 mg/0,1 ml|4 unidoses à usage unique","1 boîte de sucres","1 Biafine","1 décontaminant lacrymogène"]},{"g": "Face filet 1","i": ["2 pansements CHU","3 pansements absorbants","2 pansements israéliens","2 garrots CAT","15 × 2 compresses","2 PISH (QuikClot)"]},{"g": "Face filet 2","i": ["1 collecteur OPTC","1 Jesco","2 lunettes","3 sachets de gants","3 écharpes triangulaires","2 couvertures iso non stériles","1 couverture iso stérile"]},{"g": "Face filet 3 · bilan","i": ["TA manuelle : 1 tensiomètre","TA manuelle : 1 stéthoscope","Brassard Small","Brassard Médium","Brassard Large","Sat O2 : 1 oxymètre","Sat O2 : 1 capteur adulte","Sat O2 : piles de réserve","T° : 1 Thermoscan|À prendre au local","T° : protège-sondes","Glycémie : 1 lecteur","Glycémie : 1 boîte de bandelettes","Glycémie : 10 lancettes"]},{"g": "Face filet 3 · kit AEV et masques","i": ["FR DEF-09-02","2 paires de gants","Dakin 125 ml ou 2 × 60 ml","2 flacons de trempage","1 sparadrap","5 × 2 compresses stériles","5 masques FFP2","5 masques chirurgicaux"]},{"g": "Pochette avant","i": ["2 sacs DAOM","3 sacs DASRI","5 Vomix","1 bouteille d'eau potable","5 gobelets","5 touillettes","1 rubalise","1 paire de gants de travail T7","1 paire de gants de travail T8"]}]],[1,"DAE Fred Easyport Plus","",["1 DSA · voyant vert clignotant|OK, sinon HS = avis","1 Jesco","1 gant éponge","4 rasoirs","2 paires d'électrodes adultes","1 paire d'électrodes pédia","1 batterie de rechange avec capuchon","1 cahier DSA"]],[1,"Defigard Touch 7","",["Test de fonctionnement · voyant vert clignotant|OK, sinon HS = avis",{"g": "Pochette latérale gauche · pression non invasive","i": ["1 tuyau de jonction gris","1 brassard adulte","1 brassard enfant","1 brassard grand adulte"]},{"g": "Pochette frontale · défibrillation","i": ["1 gant éponge","2 paires d'électrodes adultes","1 paire d'électrodes pédiatriques","1 cahier DSA"]},{"g": "Pochette latérale droite · saturation O2 / ECG","i": ["1 câble de sat","1 capteur de sat adulte","1 capteur de sat enfant","1 capteur de sat nourrisson","4 rasoirs UU","1 câble ECG 4 + 6 brins","2 jeux de 10 électrodes"]}]],[1,"Aspirateur Accuvac Pro","",["Test · appui 3 s en bouchant le tuyau, puis lecture des LED vertes|OK, sinon défaut = cf. fiche","1 aspirateur","1 poche collectrice UU","1 tuyau","1 embout stop-vide","2 paires de lunettes","1 jeu de réarmement poche + tuyau + stop-vide","2 sondes CH26","2 sondes CH18","2 sondes CH12","2 sondes CH8","2 sondes CH6"]],[1,"Gilets de protection","",["Gilets de protection · 1 par équipier|Les prendre au local en choisissant la bonne taille"]],[2,"Équipements de protection individuelle","",["6 casques F2","2 paires de gants de travail taille 7","2 paires de gants de travail taille 8","2 paires de gants de travail taille 9|Caisse transparente"]],[2,"Éclairage","",[{"g": "Projecteur","i": ["1 projecteur|Tester 0/I","1 rallonge (pochette)","1 mât télescopique","1 trépied télescopique"]},{"g": "Sac à dos noir, accessoires","i": ["1 chargeur (poche avant)","2 rallonges","1 seconde tête d'éclairage"]}]],[2,"Divers","",["2 cales-porte","1 pied de biche","1 coupe-boulon","1 rallonge-multiprise 15 m sur enrouleur",{"g": "Kit de protection contre les airbags","i": ["1 petit modèle","1 grand modèle"]}]],[2,"Administratif","",["1 main courante","1 règle","1 plan de Paris","1 bloc de fiches bilan","1 classeur de fiches réflexe","2 cahiers DSA PCPS","5 fiches de suivi de victime"]],[2,"Kits","",[{"g": "Kit AEV (accident d'exposition au risque viral) · pochette verte","i": ["Fiche réflexe DEF-09-02","2 paires de gants","1 flacon Dakin 125 ml ou 2 × 60 ml","2 rince-œil 500 ml","2 flacons de trempage","1 sparadrap","5 sachets de 2 compresses stériles"]},{"g": "Kit accouchement · pochette orange","i": ["3 × 2 paires de gants stériles","2 champs stériles","5 × 2 compresses","2 couvertures iso stériles","2 masques chirurgicaux","1 paire de ciseaux stérile","4 clamps de Barr","2 bonnets jersey","2 lunettes de protection","10 doses de sérum phy","2 canules T000","2 sachets à bébé","2 charlottes","5 dosettes de chlorhexidine","2 sondes CH 8","2 sondes CH 6","2 blouses de protection","2 pansements absorbants"]},{"g": "Kit risque biologique renforcé · caisse transparente","i": ["6 kits scellés individuels|Chaque kit : 1 surblouse, 2 surchaussures, 1 charlotte, 3 paires de gants non stériles (S-M-L), 1 paire de lunettes, 1 masque FFP2, 2 masques chirurgicaux, 1 sac DASRI 50 L"]},{"g": "Kit situation nombreuses victimes · pochette rouge","i": ["3 sachets de gants (S, M, L)","2 Jesco","12 couvertures iso non stériles","4 PISH","8 garrots CAT","4 pansements israéliens","4 pansements CHU","4 pansements absorbants","10 × 2 compresses","2 sparadraps","2 bandes de contention","2 marqueurs dermographes"]},{"g": "Kit membre sectionné · valise verte","i": ["2 champs stériles","1 sachet petit","1 sachet moyen","1 sachet grand","6 poches de froid"]},{"g": "Kit brûlures · valise rouge","i": ["1 couverture hydrogel 1 m × 1 m","2 compresses hydrogel 20 × 45","2 compresses hydrogel 20 × 20","4 compresses hydrogel 10 × 10","5 recharges 3,5 ml","1 spray hydrogel","2 couvertures iso stériles","3 paires de gants stériles"]}]],[2,"Immobilisation","",[{"g": "Colliers cervicaux","i": ["Collier cervical adulte","Collier cervical pédia","Collier cervical no neck"]},{"g": "Attelles de membres · sac bleu · à dépression","i": ["1 attelle jambe","1 attelle avant-bras","1 attelle poignet","1 pompe","1 tuyau (pompe)"]},{"g": "Attelles de membres · sac bleu · modelables","i": ["1 attelle modelable jambe","5 petites sangles (jambe)","1 grande sangle (jambe)","1 attelle modelable tout usage","4 petites sangles (tout usage)","1 grande sangle (tout usage)","1 attelle modelable avant-bras","3 petites sangles (avant-bras)","2 grandes sangles (avant-bras)","1 attelle modelable poignet","2 petites sangles (poignet)","1 grande sangle (poignet)"]},{"g": "Attelle cervico-thoracique","i": ["1 ACT","1 coussin","2 sangles de tête"]},{"g": "Ceintures pelviennes · pochette bleu foncé","i": ["1 ceinture Small","1 ceinture Standard","1 ceinture Large"]},{"g": "Matelas immobilisateur à dépression","i": ["1 matelas immobilisateur à dépression (MID)","1 pompe à vide","1 tuyau et embout (pompe à vide)"]}]],[2,"Relevage","",["1 brancard cuillère avec support de tête","2 cales-tête (cuillère)","2 sangles (cuillère)","1 PDIT","1 support de tête (PDIT)",{"g": "Sac à dos bleu · accessoires","i": ["PDIT : 2 blocs latéraux","PDIT : 2 bandes velcro","PDIT : 1 sangle araignée","PDIT : 4 sangles","Brancard cuillère : 3 sangles"]}]],[2,"Transport","",["1 brancard pliant","1 pochette de sangles (brancard pliant)","1 chaise portoir","2 sangles (chaise)","1 alèse portoir"]],[2,"Réserve « Lot C »","",[{"g": "Caisse transparente","i": ["Boîte de gants taille S","Boîte de gants taille M","Boîte de gants taille L","Boîte de gants taille XL","5 draps à usage unique"]},{"g": "Sac-valise noir · pochette bleue","i": ["10 dosettes chlorhexidine","10 dosettes sérum physio","10 × 2 compresses stériles","3 bandes extensibles grandes","3 bandes extensibles petites","1 rouleau de sparadrap","1 boîte de pansements individuels","1 Jesco","4 couvertures non stériles","2 champs stériles","2 tire-tiques","20 sucres emballés"]},{"g": "Sac-valise noir · autres","i": ["6 poches de froid instantané","10 gobelets","10 Vomix","5 haricots jetables","1 SHA 50 cl","1 spray désinfectant","1 paquet de lingettes","1 rouleau de sacs DASRI","1 rouleau de sacs DAOM"]}]],[2,"Eau","",["Eau potable · 3 litres"]]];
+
+// Mise à plat
+const S=["Remisé au local · à prendre avant le départ", "Véhicule"];
+const items=[];D.forEach((s,si)=>{const[f,t,w,arr]=s;const push=(txt,g)=>{const[x,n]=txt.split('|');items.push({id:items.length,si,f,sec:t,w,g,x,n:n||''})};arr.forEach(e=>typeof e==='string'?push(e,''):e.i.forEach(x=>push(x,e.g)))});
+
+const K='valmy-mat-v2022-05';let done=new Set();
+try{done=new Set(JSON.parse(localStorage.getItem(K)||'[]'))}catch(e){}
+const save=()=>{try{localStorage.setItem(K,JSON.stringify([...done]))}catch(e){}};
+
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+// normalisation sans accents, caractère par caractère, pour garder les positions
+const norm=s=>{let o='',m=[];for(let i=0;i<s.length;i++){const c=s[i].normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();for(const ch of c){o+=ch;m.push(i)}}return{o,m}};
+const terms=q=>norm(q.trim()).o.split(/\s+/).filter(Boolean);
+const hl=(s,ts)=>{if(!ts.length)return esc(s);const{o,m}=norm(s);const mark=new Array(s.length).fill(false);for(const t of ts){let p=o.indexOf(t);while(p>-1){for(let k=p;k<p+t.length;k++)mark[m[k]]=true;p=o.indexOf(t,p+1)}}let r='',on=false;for(let i=0;i<s.length;i++){if(mark[i]&&!on){r+='<mark>';on=true}if(!mark[i]&&on){r+='</mark>';on=false}r+=esc(s[i])}return r+(on?'</mark>':'')};
+const fmt=(x,ts)=>{const mm=x.match(/^(\d+(?: × \d+)?)\s(.*)$/);return mm?`<span class="q">${hl(mm[1],ts)}</span> ${hl(mm[2],ts)}`:hl(x,ts)};
+
+const $=id=>document.getElementById(id);let F=0;const open=new Set();
+function render(){
+ const ts=terms($('q').value);const L=$('list');let html='',shown=0,lastF=0;
+ D.forEach((s,si)=>{
+  if(F&&s[0]!==F)return;
+  const all=items.filter(it=>it.si===si);
+  const vis=ts.length?all.filter(it=>{const h=norm([it.sec,it.w,it.g,it.x,it.n].join(' ')).o;return ts.every(t=>h.includes(t))}):all;
+  if(!vis.length)return;shown+=vis.length;
+  if(s[0]!==lastF){html+=`<div class="sheet">${S[s[0]-1]}</div>`;lastF=s[0]}
+  const nd=all.filter(it=>done.has(it.id)).length;
+  const isOpen=ts.length||open.has(si);
+  html+=`<details data-s="${si}"${isOpen?' open':''}><summary><span>${hl(s[1],ts)}${s[2]?`<span class="where">${hl(s[2],ts)}</span>`:''}</span><span class="cnt${nd===all.length?' done':''}">${ts.length?vis.length+' trouvé'+(vis.length>1?'s':''):nd+'/'+all.length}</span></summary>`;
+  let g=null,open1=false;
+  vis.forEach(it=>{if(it.g!==g){if(open1)html+='</ul>';html+=it.g?`<p class="g">${hl(it.g,ts)}</p>`:'';html+='<ul>';open1=true;g=it.g}
+   html+=`<li><label><input type="checkbox" data-i="${it.id}"${done.has(it.id)?' checked':''}><span>${fmt(it.x,ts)}${it.n?`<span class="n">${hl(it.n,ts)}</span>`:''}</span></label></li>`});
+  if(open1)html+='</ul>';html+='</details>';
+ });
+ L.innerHTML=shown?html:`<div class="empty">Rien ne correspond à « ${esc($('q').value)} ».<br>Essaie un mot plus court ou sans abréviation.</div>`;
+ $('info').style.display=ts.length?'none':'';
+ const pool=F?items.filter(i=>i.f===F):items;const nd=pool.filter(i=>done.has(i.id)).length;
+ $('prog').textContent=ts.length?`${shown} résultat${shown>1?'s':''}`:`${nd}/${pool.length} vérifiés`;
+ $('clr').classList.toggle('on',!!$('q').value);
+}
+$('q').addEventListener('input',render);
+$('clr').addEventListener('click',()=>{$('q').value='';render();$('q').focus()});
+$('tabs').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;F=+b.dataset.f;for(const x of $('tabs').children)x.setAttribute('aria-pressed',x===b);render()});
+$('list').addEventListener('change',e=>{const i=+e.target.dataset.i;e.target.checked?done.add(i):done.delete(i);save();
+ const d=e.target.closest('details'),si=+d.dataset.s,all=items.filter(it=>it.si===si),nd=all.filter(it=>done.has(it.id)).length;
+ if(!terms($('q').value).length){const c=d.querySelector('.cnt');c.textContent=nd+'/'+all.length;c.classList.toggle('done',nd===all.length)}
+ const pool=F?items.filter(x=>x.f===F):items;if(!terms($('q').value).length)$('prog').textContent=`${pool.filter(x=>done.has(x.id)).length}/${pool.length} vérifiés`});
+$('list').addEventListener('toggle',e=>{if(terms($('q').value).length)return;const si=+e.target.dataset.s;e.target.open?open.add(si):open.delete(si)},true);
+const RZ=[...document.querySelectorAll('.rz')];let tm=null;
+const disarm=()=>{clearTimeout(tm);tm=null;RZ.forEach(b=>{b.textContent='Tout décocher';b.classList.remove('warn')})};
+RZ.forEach(b=>b.addEventListener('click',()=>{if(!b.classList.contains('warn')){disarm();b.textContent='Confirmer ?';b.classList.add('warn');tm=setTimeout(disarm,4000);return}
+ disarm();done.clear();save();render()}));
+render();
+}
+</script>
+</body>
+</html>
